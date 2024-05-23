@@ -5,16 +5,13 @@ import { RefineKbar, RefineKbarProvider } from "@refinedev/kbar";
 import { useNotificationProvider } from "@refinedev/antd";
 import "@refinedev/antd/dist/reset.css";
 
-import dataProvider, {
-	liveProvider,
-} from "@refinedev/nestjs-query";
 import routerBindings, {
 	DocumentTitleHandler,
 	UnsavedChangesNotifier,
 } from "@refinedev/react-router-v6";
 import { App as AntdApp } from "antd";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
+import { authProvider, dataProvider, liveProvider } from "./providers";
 
 function App() {
 	return (
@@ -24,11 +21,11 @@ function App() {
 				<AntdApp>
 					<DevtoolsProvider>
 						<Refine
-							// dataProvider={dataProvider(gqlClient)}
-							// liveProvider={liveProvider(wsClient)}
+							dataProvider={dataProvider}
+							liveProvider={liveProvider}
 							notificationProvider={useNotificationProvider}
 							routerProvider={routerBindings}
-							// authProvider={}
+							authProvider={authProvider}
 							options={{
 								syncWithLocation: true,
 								warnWhenUnsavedChanges: true,
