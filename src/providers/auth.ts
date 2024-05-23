@@ -13,7 +13,7 @@ export const authProvider: AuthProvider = {
 			// Calls the GraphQL API to login the user
 			// DataProvider.custom is used to make a custom request to the GraphQL API
 			const { data } = await dataProvider.custom({
-				url: API_URL,
+				url: `${API_URL}`,
 				method: "post",
 				headers: {},
 				meta: {
@@ -73,21 +73,22 @@ export const authProvider: AuthProvider = {
 
 	// Check if the user is authenticated
 	check: async () => {
+		const accessToken = localStorage.getItem("access_token");
 		try {
 			// Calls the GraphQL API to get the user information
 			// We're using the me query to check if the user is authenticated
 			await dataProvider.custom({
 				url: API_URL,
 				method: "post",
-				headers: {},
+				headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
 				meta: {
 					rawQuery: `
-					query Me {
-						me {
-							name
-						}
-					}
-					`,
+                    query Me {
+                        me {
+                          name
+                        }
+                      }
+                `,
 				},
 			});
 
@@ -108,7 +109,6 @@ export const authProvider: AuthProvider = {
 	// Retrieve's the user's information
 	getIdentity: async () => {
 		const accessToken = localStorage.getItem("access_token");
-
 		try {
 			const { data } = await dataProvider.custom<{ me: any }>({
 				url: API_URL,
