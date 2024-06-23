@@ -2,6 +2,11 @@ import { AuthProvider } from "@refinedev/core";
 
 import { API_URL, dataProvider } from "./data";
 
+export const authCredentials = {
+	email: import.meta.env.VITE_ADMIN_EMAIL_ADDRESS,
+	password: import.meta.env.VITE_ADMIN_PASSWORD,
+};
+
 /**
  * Authentication provider object.
  * Contains methods for login, logout, error handling, and user information retrieval.
