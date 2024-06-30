@@ -32,8 +32,6 @@ const UpcomingEvents = () => {
 		}
 	});
 
-	console.log(data);
-
 	const styles: CardProps['styles'] = {
 		header: {
 			padding: '8px 16px',
