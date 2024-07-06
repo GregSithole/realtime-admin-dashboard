@@ -12,7 +12,7 @@ import type { CompaniesListQuery } from "@/graphql/types";
 
 type Company = GetFieldsFromList<CompaniesListQuery>;
 
-const CompanyList = () => {
+const CompanyList = ({ children }: React.PropsWithChildren) => {
 	const go = useGo();
 	const { tableProps, filters } = useTable({
 		resource: 'companies',
@@ -44,67 +44,72 @@ const CompanyList = () => {
 	});
 
 	return (
-		<List
-			breadcrumb={false}
-			headerButtons={() => (
-				<CreateButton
-					onClick={() => {
-						go({
-							to: {
-								resource: 'companies',
-								action: 'create'
-							},
-							options: {
-								keepQuery: true,
-							},
-							type: 'replace'
-						})
-					}}
-				/>
-			)}
-		>
-			<Table {...tableProps} pagination={{ ...tableProps.pagination }}>
-				<Table.Column<Company>
-					key="name"
-					dataIndex="name"
-					title="Company Title"
-					defaultFilteredValue={getDefaultFilter('id', filters)}
-					filterIcon={<SearchOutlined />}
-					filterDropdown={(props) => (
-						<FilterDropdown {...props}>
-							<Input placeholder='Search Company' />
-						</FilterDropdown>
-					)}
-					render={(value, record) => (
-						<Space>
-							<CustomAvatar shape='square' name={record.name} src={record.avatarUrl} />
-							<Text style={{ whiteSpace: 'nowrap' }}>{record.name}</Text>
-						</Space>
-					)}
-				/>
-				<Table.Column<Company>
-					key="totalRevenue"
-					dataIndex="totalRevenue"
-					title="Open Deals amount"
-					render={(value, company) => (
-						<Text>
-							{currencyNumber(company?.dealsAggregate?.[0].sum?.value || 0)}
-						</Text>
-					)}
-				/>
-				<Table.Column<Company>
-					key="id"
-					dataIndex="id"
-					title="Actions"
-					render={(value) => (
-						<Space>
-							<EditButton hideText size="small" recordItemId={value} />
-							<DeleteButton hideText size="small" recordItemId={value} />
-						</Space>
-					)}
-				/>
-			</Table>
-		</List>
+		<div>
+			<List
+				breadcrumb={false}
+				headerButtons={() => (
+					<CreateButton
+						onClick={() => {
+							go({
+								to: {
+									resource: 'companies',
+									action: 'create'
+								},
+								options: {
+									keepQuery: true,
+								},
+								type: 'replace'
+							})
+						}}
+					/>
+				)}
+			>
+				<Table {...tableProps} pagination={{ ...tableProps.pagination }}>
+					<Table.Column<Company>
+						key="name"
+						dataIndex="name"
+						title="Company Title"
+						defaultFilteredValue={getDefaultFilter('id', filters)}
+						filterIcon={<SearchOutlined />}
+						filterDropdown={(props) => (
+							<FilterDropdown {...props}>
+								<Input placeholder='Search Company' />
+							</FilterDropdown>
+						)}
+						render={(value, record) => (
+							<Space>
+								<CustomAvatar shape='square' name={record.name} src={record.avatarUrl} />
+								<Text style={{ whiteSpace: 'nowrap' }}>{record.name}</Text>
+							</Space>
+						)}
+					/>
+					<Table.Column<Company>
+						key="totalRevenue"
+						dataIndex="totalRevenue"
+						title="Open Deals amount"
+						render={(value, company) => (
+							<Text>
+								{currencyNumber(company?.dealsAggregate?.[0].sum?.value || 0)}
+							</Text>
+						)}
+					/>
+					<Table.Column<Company>
+						key="id"
+						dataIndex="id"
+						title="Actions"
+						render={(value) => (
+							<Space>
+								<EditButton hideText size="small" recordItemId={value} />
+								<DeleteButton hideText size="small" recordItemId={value} />
+							</Space>
+						)}
+					/>
+				</Table>
+			</List>
+			{children}
+
+		</div>
+
 	)
 }
 
