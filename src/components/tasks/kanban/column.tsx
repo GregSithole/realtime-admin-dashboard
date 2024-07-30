@@ -6,7 +6,7 @@ import { Badge, Button, Space } from "antd";
 interface Props {
 	id: string;
 	title: string;
-	description: React.ReactNode;
+	description?: React.ReactNode;
 	count: number;
 	data?: UseDroppableArguments['data']
 	onAddClick?: (args: { id: string }) => void;
@@ -37,7 +37,7 @@ const KanbanColumn = ({ children, id, title, description, count, data, onAddClic
 				</Space>
 				{description}
 			</div>
-			<div style={{ flex: 1, overflow: active ? 'unset' : 'scroll', border: '2px dashed transparent', borderColor: isOver ? '#000040' : 'transparent', borderRadius: '4px' }}>
+			<div style={{ flex: 1, overflowY: active ? 'unset' : 'auto', border: '2px dashed transparent', borderColor: isOver ? '#000040' : 'transparent', borderRadius: '4px' }}>
 				<div style={{ marginTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
 					{children}
 				</div>
