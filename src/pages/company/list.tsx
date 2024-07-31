@@ -4,7 +4,7 @@ import { COMPANIES_LIST_QUERY } from '@/graphql/queries';
 import { currencyNumber } from '@/utilities';
 import { SearchOutlined } from '@ant-design/icons';
 import { CreateButton, DeleteButton, EditButton, FilterDropdown, List, useTable } from '@refinedev/antd'
-import { getDefaultFilter, useGo } from '@refinedev/core'
+import { getDefaultFilter, HttpError, useGo } from '@refinedev/core'
 import { Input, Space, Table } from 'antd';
 import type { GetFieldsFromList } from "@refinedev/nestjs-query";
 import type { CompaniesListQuery } from "@/graphql/types";
@@ -14,7 +14,7 @@ type Company = GetFieldsFromList<CompaniesListQuery>;
 
 const CompanyList = ({ children }: React.PropsWithChildren) => {
 	const go = useGo();
-	const { tableProps, filters } = useTable({
+	const { tableProps, filters } = useTable<GetFieldsFromList<CompaniesListQuery>, HttpError, GetFieldsFromList<CompaniesListQuery>>({
 		resource: 'companies',
 		onSearch: (values) => {
 			return [
