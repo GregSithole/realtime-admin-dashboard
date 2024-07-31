@@ -17,6 +17,8 @@ import CompanyList from "./pages/company/list";
 import CompanyCreate from "./pages/company/create";
 import CompanyEdit from "./pages/company/edit";
 import TaskList from "./pages/tasks/list";
+import CreateTask from "./pages/tasks/create";
+import EditTask from "./pages/tasks/edit";
 
 function App() {
 	return (
@@ -54,8 +56,9 @@ function App() {
 										<Route path="new" element={<CompanyCreate />} />
 										<Route path="edit/:id" element={<CompanyEdit />} />
 									</Route>
-									<Route path="/tasks">
-										<Route index element={<TaskList />} />
+									<Route path="/tasks" element={<TaskList><Outlet /></TaskList>}>
+										<Route path="new" element={<CreateTask />} />
+										<Route path="edit/:id" element={<EditTask />} />
 									</Route>
 								</Route>
 							</Routes>
