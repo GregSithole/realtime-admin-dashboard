@@ -21,3 +21,11 @@ export {
 	DashboardTotalCountCard,
 	DashboardLatestActivities,
 };
+export * from "./accordion";
+export * from "./tags/contactStatusTag";
+export * from "./tasks/form/description";
+export * from "./tasks/form/dueDate";
+export * from "./tasks/form/stage";
+export * from "./tasks/form/title";
+export * from "./tasks/form/users";
+export * from "./tasks/form/header";
