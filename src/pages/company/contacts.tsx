@@ -9,7 +9,7 @@ import {
 	SearchOutlined,
 	TeamOutlined,
 } from "@ant-design/icons";
-import { Button, Card, Input, Select, Space, Table } from "antd";
+import { Button, Card, CardProps, Input, Select, Space, Table } from "antd";
 
 import { statusOptions } from "@/constants";
 import { COMPANY_CONTACTS_TABLE_QUERY } from "@/graphql/queries";
@@ -95,13 +95,19 @@ const CompanyContacts = () => {
 		},
 	});
 
+	const styles: CardProps['styles'] = {
+		header: {
+			borderBottom: '1px solid #D9D9D9',
+			marginBottom: '1px',
+		},
+		body: {
+			padding: 0
+		}
+	};
+
 	return (
 		<Card
-			headStyle={{
-				borderBottom: "1px solid #D9D9D9",
-				marginBottom: "1px",
-			}}
-			bodyStyle={{ padding: 0 }}
+			styles={styles}
 			title={
 				<Space size="middle">
 					<TeamOutlined />
