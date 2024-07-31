@@ -3,7 +3,7 @@ services:
   crypto:
     build:
       context: $PWD/../..
-      dockerfile: $PWD/crypto/Dockerfile
+      dockerfile: $PWD/real-time-dashboard/Dockerfile
     restart: always
     expose:
       - "80"
