@@ -1,6 +1,6 @@
 version: "3.6"
 services:
-  crypto:
+  refine-dashboard:
     build:
       context: $PWD/../..
       dockerfile: $PWD/real-time-dashboard/Dockerfile
@@ -20,9 +20,9 @@ services:
     expose:
       - 80
     depends_on:
-      - crypto
+      - refine-dashboard
     links:
-      - crypto
+      - refine-dashboard
 
 networks:
   default:
