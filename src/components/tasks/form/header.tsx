@@ -4,10 +4,11 @@ import { Typography, Space, Tag } from "antd";
 
 import dayjs from "dayjs";
 
-import { Text, UserTag } from "@/components";
 import { getDateColor } from "@/utilities";
 
 import { Task } from "@/graphql/schema.types";
+import { Text } from "@/components/text";
+import { UserTag } from "@/components/tags/userTag";
 
 type DescriptionProps = {
 	description?: Task["description"];
