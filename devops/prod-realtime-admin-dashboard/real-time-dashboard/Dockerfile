@@ -1,5 +1,7 @@
 FROM node:18.19.0-buster
 
+ENV NODE_OPTIONS="--max-old-space-size=8192"
+
 WORKDIR /app
 
 COPY ./package.json /app/
